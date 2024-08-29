@@ -1,1 +1,121 @@
-Hello World
+<!-- Paper icons created by DinosoftLabs - Flaticon: https://www.flaticon.com/free-icons/paper --> 
+<!-- This page was done with the help of ChatGPT during a random summer day with the silly prompts of Elias Abad Rocamora -->
+<!-- The starting point was a screenshot of Shibani Santurkar's webpage -->  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: grid;
+            place-items: center;  /* Centers both horizontally and vertically */
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+        .profilepic {
+            border-radius: 5%;
+            width: 250px;
+            height: 250px;
+            margin-right: 20px;
+        }
+        .profile-container div {
+            max-width: 700px;
+        }
+        .profile-container h1 {
+            margin-bottom: -10px;
+        }
+        .profile-container p {
+            margin: 5px 0;
+        }
+        .paper-list {
+            margin-top: 20px;
+        }
+        .paper-list h2 {
+            margin-bottom: 10px;
+        }
+        .paper-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .paper-list li {
+            margin-bottom: 15px;
+        }
+        .highlight {
+            font-weight: bold;
+        }
+        .papertitle {
+            color: #2ca02c;
+            margin-bottom: 10px;
+        }
+        .venue {
+            font-weight: bold;
+            color: #d62728;
+        }
+        .myname {
+            font-weight: bold;
+            color: #1f77b4;
+        }
+        .highlighted-link {
+            text-decoration: none;
+            color: #1f77b4;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-container">
+    <img src="headshot_ICML24.jpg" class="profilepic" title="In Vienna for ICML 2024" alt="Elias Abad Rocamora">
+    <div>
+        <h1>Elias Abad Rocamora</h1>
+        <h2>
+            <a href="https://scholar.google.com/citations?user=lHfp1OAAAAAJ&hl=en"><img src="Logo_scholar.png" title="Scholar" style="margin-left: 10px; width: 30px; height: 30px; vertical-align: top;"></a>
+            <a href="https://github.com/megaelius"><img src="Logo_github.png" title="Github" style="margin-left: 10px; width: 30px; height: 30px; vertical-align: top;"></a>
+        </h2>
+        <p>I'm a PhD student at <img src="Logo_EPFL.jpg" title="École Polytechnique Fédérale de Lausanne" alt="EPFL" style="width: 51px; height: 15px; vertical-align: top;"> advised by Prof. <a href="https://www.epfl.ch/labs/lions/people/volkan-cevher/" class="highlighted-link">Volkan Cevher</a>. 
+           Before that, I completed my MSc in Applied Mathematics at <img src="logo_UC3M.png" title="Universidad Carlos III de Madrid" alt="UC3M" style="width: 51px; height: 15px; vertical-align: top;"> advised by Prof. <a href="https://www.tsc.uc3m.es/~olmos/" class="highlighted-link">Pablo M. Olmos</a>.
+           Even before that, I completed my BSc in Data Science and Engineering at <img src="Logo_UPC.png" title="Universitat Politècnica de Catalunya" alt="UPC" style="width: 25px; height: 25px; vertical-align: -6px;">.</p>
+        <p>My research targets robustness in Natural Language Processing, where we desire Language Models to be safe against attacks, e.g., Jailbreaking or missclassification. More specifically, I'm interested in Adversarial Attacks, Adversarial Training and Neural Network Verification methods. </p>
+    </div>
+</div>
+
+<div class="paper-list">
+    <h2>Selected Papers</h2>
+    <ul id="papers">
+        <!-- Papers will be inserted here -->
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('papers.csv')
+            .then(response => response.text())
+            .then(data => {
+                const papers = data.trim().split('\n').slice(1); // Skip header
+                const paperList = document.getElementById('papers');
+
+                papers.forEach(paper => {
+                    const [title, authors, or, gh, venue, year, selected] = paper.split(';');
+                    const li = document.createElement('li');
+                    const authorList = authors.replace('Elias Abad Rocamora', '<span class="myname">Elias Abad Rocamora</span>');
+                    li.innerHTML = `<h3 class=papertitle>${title} 
+                        <a href="${or}">  <img src="Logo_paper.png" title="OpenReview" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                        <a href="${gh}">  <img src="Logo_github.png" title="GitHub" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                        </h3>
+                                    ${authorList}, <span class="venue">${venue} ${year}</span>`;
+                    if (selected.trim().toLowerCase() === 'true') {
+                        li.style.fontWeight = 'bold';
+                    }
+                    paperList.appendChild(li);
+                });
+            });
+    });
+</script>
+</body>
+</html>
