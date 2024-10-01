@@ -1,4 +1,5 @@
 title;authors;openreview;github;venue;year;selected
+Membership Inference Attacks against Large Vision-Language Models;Zhan Li, Yongtao Wu, Yihang Chen, Francesco Tonin, Elias Abad Rocamora, Volkan Cevher;https://openreview.net/forum?id=nv2Qt5cj1a;https://huggingface.co/datasets/JaineLi/VL-MIA;NeurIPS;2024;1
 Revisiting Character-level Adversarial Attacks for Language Models;Elias Abad Rocamora, Yongtao Wu, Fanghui Liu, Grigorios Chrysos, Volkan Cevher;https://openreview.net/forum?id=AZWqXfM6z9;https://github.com/LIONS-EPFL/Charmer;ICML;2024;1
 Efficient Local Linearity Regularization to Overcome Catastrophic Overfitting;Elias Abad Rocamora, Fanghui Liu, Grigorios Chrysos, Pablo M. Olmos, Volkan Cevher;https://openreview.net/forum?id=SZzQz8ikwg;https://github.com/LIONS-EPFL/ELLE;ICLR;2024;1
 Sound and Complete Verification of Polynomial Networks;Elias Abad Rocamora, Mehmet Fatih Sahin, Fanghui Liu, Grigorios Chrysos, Volkan Cevher;https://openreview.net/forum?id=gsdHDI-p6NI;https://github.com/megaelius/PNVerification;NeurIPS;2022;1
