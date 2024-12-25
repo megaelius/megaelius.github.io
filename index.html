@@ -123,5 +123,45 @@
             });
     });
 </script>
+
+<div class="paper-list">
+    <h2>Talks</h2>
+    <ul id="talks">
+        <!-- Papers will be inserted here -->
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('talks.csv')
+            .then(response => response.text())
+            .then(data => {
+                const papers = data.trim().split('\n').slice(1); // Skip header
+                const paperList = document.getElementById('talks');
+
+                papers.forEach(paper => {
+                    const [title,place,venue,year,video,slides] = paper.split(';');
+                    const li = document.createElement('li');
+                    if (video === '') {
+                        li.innerHTML = `<h3 class=papertitle>${title} 
+                            <a href="${slides}">  <img src="Logo_paper.png" title="Slides" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                            </h3>
+                            ${place}, <span class="venue">${venue} ${year}</span>`;
+                        li.style.fontWeight = 'bold';
+                    }
+                    else{
+                        li.innerHTML = `<h3 class=papertitle>${title} 
+                            <a href="${slides}">  <img src="Logo_paper.png" title="Slides" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                            <a href="${video}">  <img src="Logo_yt.png" title="Video" style="margin-left: 5px; width: 40px; height: 30px; vertical-align: -7px;"></a>
+                            </h3>
+                            ${place}, <span class="venue">${venue} ${year}</span>`;
+                        li.style.fontWeight = 'bold';
+                    }
+                    paperList.appendChild(li);
+                });
+            });
+    });
+</script>
+
 </body>
 </html>
