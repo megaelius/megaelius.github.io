@@ -107,15 +107,23 @@
                 const paperList = document.getElementById('papers');
 
                 papers.forEach(paper => {
-                    const [title, authors, or, gh, venue, year, selected] = paper.split(';');
+                    const [title, authors, openreview, gh, huggingface, venue, year, selected] = paper.split(';');
                     const li = document.createElement('li');
                     const authorList = authors.replace('Elias Abad Rocamora', '<span class="myname">Elias Abad Rocamora</span>');
+                    // Build the links HTML
+                    let linksHTML = `<a href="${openreview}">  <img src="Logo_paper.png" title="OpenReview" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                        <a href="${gh}">  <img src="Logo_github.png" title="GitHub" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>`;
+                    
+                    // Add Hugging Face logo only if the link is available and not empty
+                    if (huggingface && huggingface.trim() !== '') {
+                        linksHTML += `<a href="${huggingface}">  <img src="Logo_HF.png" title="Hugging Face" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>`;
+                    }
+                    
                     li.innerHTML = `<h3 class=papertitle>${title} 
-                        <a href="${or}">  <img src="Logo_paper.png" title="OpenReview" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
-                        <a href="${gh}">  <img src="Logo_github.png" title="GitHub" style="margin-left: 5px; width: 30px; height: 30px; vertical-align: -7px;"></a>
+                        ${linksHTML}
                         </h3>
                                     ${authorList}, <span class="venue">${venue} ${year}</span>`;
-                    if (selected.trim().toLowerCase() === 'true') {
+                    if (selected && selected.trim() === '1') {
                         li.style.fontWeight = 'bold';
                     }
                     paperList.appendChild(li);
